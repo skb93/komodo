@@ -1,7 +1,7 @@
 version: '3.3'
 services:
     pihole:
-        container_name: binhex-official-pihole
+        container_name: binhex-official-pihole-komodo
         network_mode: br0
         environment:
             - TZ=America/Los_Angeles
