@@ -1,1 +1,25 @@
-test
+version: '3.3'
+services:
+    nginx-proxy-manager:
+        container_name: Nginx-Proxy-Manager-Official
+        network_mode: bridge
+        environment:
+            - TZ=America/Los_Angeles
+            - HOST_OS=Unraid
+            - HOST_HOSTNAME=Tower
+            - HOST_CONTAINERNAME=Nginx-Proxy-Manager-Official
+            - DB_SQLITE_FILE=/data/database.sqlite
+        labels:
+            - net.unraid.docker.managed=dockerman
+            - 'net.unraid.docker.webui=http://[IP]:[PORT:81]'
+            - 'net.unraid.docker.icon=https://nginxproxymanager.com/icon.png'
+        ports:
+            - '81:81/tcp'
+            - '18080:80/tcp'
+            - '18443:443/tcp'
+            - '3000:3000/tcp'
+        volumes:
+            - '/mnt/user/appdata/Nginx-Proxy-Manager-Official/data:/data:rw'
+            - '/mnt/user/appdata/Nginx-Proxy-Manager-Official/letsencrypt:/etc/letsencrypt:rw'
+            - '/tmp/Nginx-Proxy-Manager-Official/var/log:/var/log:rw'
+        image: jc21/nginx-proxy-manager
